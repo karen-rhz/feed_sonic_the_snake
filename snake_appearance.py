@@ -60,3 +60,21 @@ class Snake(Turtle):
     def turn_right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+
+
+class Borders(Turtle):
+    def __init__(self):
+        super().__init__()
+        # To trace border of the game
+        self.penup()
+        self.hideturtle()
+        self.color("white")
+        self.goto(-350, 350)
+        self.pendown()
+        self.forward(700)
+        self.setheading(270)
+        self.forward(700)
+        self.setheading(180)
+        self.forward(700)
+        self.setheading(90)
+        self.forward(700)
