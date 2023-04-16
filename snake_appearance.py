@@ -10,48 +10,17 @@ screen = Screen()
 screen.colormode()
 
 
-class Snake:
+class Snake(Turtle):
 
     def __init__(self):
+        super().__init__()
         self.segments = []
         self.create_snake()
         self.head = self.segments[0]
 
-    def appearance_head(self):
-        sonic_whole_head = []
-        # Tongue of snake
-        sonic_tongue = Turtle("square")
-        sonic_tongue.penup()
-        sonic_tongue.color("red")
-        sonic_tongue.shapesize(0.2, 0.5)
-        sonic_tongue.goto(10, 0)
-        sonic_whole_head.append(sonic_tongue)
-
-        # Head of snake
-        sonic_head = Turtle("triangle")
-        sonic_head.color("lime green")
-        sonic_whole_head.append(sonic_head)
-
-        # Eye of snake
-        sonic_eye_positions = [(1, 8), (1, -8)]
-        for n in range(2):
-            sonic_eye = Turtle("circle")
-            sonic_eye.penup()
-            sonic_eye.color("yellow")
-            sonic_eye.shapesize(0.4, 0.4)
-            sonic_eye.goto(sonic_eye_positions[n])
-            sonic_whole_head.append(sonic_eye)
-        # So the whole list can be treated as 1 turtle object instead of 3 separate ones
-        sonic_whole_head = Turtle()
-        sonic_whole_head.goto(INITIAL_POSITIONS[2])
-        self.segments.append(sonic_whole_head)
-
     def create_snake(self):
-        for position in INITIAL_POSITIONS[:2]:
+        for position in INITIAL_POSITIONS:
             self.grow_snake(position)
-        # Can't run the rest of the code bc the head is not properly set up
-        # The head stays at (0, 0) while the whole body is moving as expected
-        self.appearance_head()
 
     def grow_snake(self, position):
         new_segment = Turtle(shape="square")
@@ -76,18 +45,18 @@ class Snake:
             self.segments[segment_number].goto(new_x, new_y)
         self.head.forward(MOVE_DISTANCE)
 
-    def up(self):
+    def turn_up(self):
         if self.head.heading() != DOWN:
             self.head.setheading(UP)
 
-    def down(self):
+    def turn_down(self):
         if self.head.heading() != UP:
             self.head.setheading(DOWN)
 
-    def left(self):
+    def turn_left(self):
         if self.head.heading() != RIGHT:
             self.head.setheading(LEFT)
 
-    def right(self):
+    def turn_right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
