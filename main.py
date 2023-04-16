@@ -1,5 +1,5 @@
 from turtle import Screen
-from snake_appearance import Snake
+from snake_appearance import Snake,Borders
 from food import Food
 from scoreboard import Score
 import time
@@ -7,7 +7,7 @@ import time
 game_over = False
 
 screen = Screen()
-screen.screensize(canvwidth=600, canvheight=600)
+screen.screensize(canvwidth=700, canvheight=700)
 screen.bgcolor("black")
 screen.title("Feed Sonic the snake")
 # .tracer(0) means
@@ -16,15 +16,15 @@ screen.tracer(0)
 sonic = Snake()
 food = Food()
 scoreboard = Score()
-
+border = Borders()
 # The snake need to respond to user input on keyboard
 # Use screen.listen() and screen.onkey()
 
 screen.listen()
-screen.onkey(sonic.up, "Up")
-screen.onkey(sonic.down, "Down")
-screen.onkey(sonic.left, "Left")
-screen.onkey(sonic.right, "Right")
+screen.onkey(sonic.turn_up, "Up")
+screen.onkey(sonic.turn_down, "Down")
+screen.onkey(sonic.turn_left, "Left")
+screen.onkey(sonic.turn_right, "Right")
 
 # Snake needs to go forward by himself
 while not game_over:
@@ -39,18 +39,18 @@ while not game_over:
         scoreboard.new_score()
 
     # Detect collision with wall = Game Over
-    if sonic.head.xcor() > 320 or sonic.head.xcor() < -320\
-            or sonic.head.ycor() > 320 or sonic.head.ycor() < -320:
+    if sonic.head.xcor() > 340 or sonic.head.xcor() < -340\
+            or sonic.head.ycor() > 340 or sonic.head.ycor() < -340:
         game_over = True
         scoreboard.game_over()
 
-    # Detect if the head hit any part of the body = Game Over
-    #     for segment in sonic.segments:
-    #         if segment == sonic.head:
-    #             pass
-    #         if sonic.head.distance(segment) < 15:
-    #             game_over = True
-    #             scoreboard.game_over()
+        # Detect if the head hit any part of the body = Game Over
+        for segment in sonic.segments:
+            if segment == sonic.head:
+                pass
+            if sonic.head.distance(segment) < 15:
+                game_over = True
+                scoreboard.game_over()
 
         for segment in sonic.segments[1:]:
             if sonic.head.distance(segment) < 15:
