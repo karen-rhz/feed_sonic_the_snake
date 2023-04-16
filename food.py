@@ -17,3 +17,8 @@ class Food(Turtle):
         cor_x = random.randint(-280, 280)
         cor_y = random.randint(-280, 280)
         self.goto(cor_x, cor_y)
+
+    def special_food(self):
+        self.shapesize(1, 1)
+        self.color("yellow")
+        self.new_food_position()
