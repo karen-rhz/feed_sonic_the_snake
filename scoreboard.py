@@ -13,6 +13,8 @@ class Score(Turtle):
         self.goto(0, 320)
         self.score = 0
         # Keeping track of highest score
+        with open("high_score.txt") as high_score_file:
+            self.high_score = int(high_score_file.read())
         self.high_score = 0
         self.refresh_scoreboard()
 
@@ -32,7 +34,15 @@ class Score(Turtle):
     #     self.write("Game Over.", align=ALIGNEMENT, font=FONT)
 
     def reset_score(self):
-        if self.score > self.high_score:
-            self.high_score = self.score
+        self.keep_high_score()
         self.score = 0
         self.refresh_scoreboard()
+
+    def keep_high_score(self):
+        # Keeping tabs on the new high score
+        if self.score > self.high_score:
+            self.high_score = self.score
+            with open("high_score.txt", mode="w") as high_score_file:
+                high_score_file.write(f"{self.high_score}")
+        else:
+            pass
