@@ -41,20 +41,20 @@ while not game_over:
     # Detect collision with wall = Game Over
     if sonic.head.xcor() > 340 or sonic.head.xcor() < -340\
             or sonic.head.ycor() > 340 or sonic.head.ycor() < -340:
+        scoreboard.reset_score()
         game_over = True
-        scoreboard.game_over()
 
         # Detect if the head hit any part of the body = Game Over
         for segment in sonic.segments:
             if segment == sonic.head:
                 pass
             if sonic.head.distance(segment) < 15:
+                scoreboard.reset_score()
                 game_over = True
-                scoreboard.game_over()
 
         for segment in sonic.segments[1:]:
             if sonic.head.distance(segment) < 15:
+                scoreboard.reset_score()
                 game_over = True
-                scoreboard.game_over()
 
 screen.exitonclick()
